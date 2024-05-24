@@ -98,6 +98,13 @@ app.use("/listings",listingsRouter)
 app.use("/listings/:id/reviews",reviewsRouter)
 app.use("/",userRouter)
 
+
+  
+app.all("*", (req ,res ,next )=>{
+    next(new ExpressError(484, "Page not Found!"));
+  });
+  
+
 app.use((err,req,res,next)=>{
     let {statuscode,message}=err;
     res.render("./listings/error.ejs",{message})
